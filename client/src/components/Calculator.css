@@ -1,0 +1,10 @@
+.leftside,.rightside{
+    height: 100vh;
+   
+}
+.leftside{
+    background: yellow;
+}
+.rightside{
+    background: skyblue;
+}
