@@ -57,29 +57,7 @@ class Calculator extends Component{
     };
 
     componentDidUpdate(){
-        this.state.socket.on("catchData",data=>{
-                
-            if(this.array_updated==false){
-            var new_array=this.state.lastoperations.concat(data)
-            if(new_array.length>10){
-                var updated_array=new_array.splice(0,1)
-                this.array_updated=true;
-                this.setState({
-                    lastoperations:new_array,
-                   
-                  })    
-            }
-            else{
-                this.array_updated=true
-            this.setState({
-                lastoperations:new_array,
-                
-              })}
-            }
-            
-                this.array_updated=false
-            
-        });
+       
         if(this.state.sucess==true){
             console.log("sendind data to server");
             var dt = new Date();
@@ -97,7 +75,30 @@ class Calculator extends Component{
                 sucess:false
             });
             
-        
+            this.state.socket.on("catchData",data=>{
+                
+                
+                var new_array=this.state.lastoperations.concat(data)
+                if(new_array.length>10){
+                    console.log(new_array)
+                    var updated_array=new_array.splice(0,1)
+                    console.log(new_array)
+                    this.setState({
+                        lastoperations:Array.from(new Set(new_array)),
+                         
+                      })    
+                }
+                else{
+                    
+                this.setState({
+                    lastoperations:Array.from(new Set(new_array)),
+                    
+                  })}
+                
+                
+                    
+                
+            });
         }
         
         else{
